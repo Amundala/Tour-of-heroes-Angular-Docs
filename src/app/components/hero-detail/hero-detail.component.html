@@ -1,0 +1,14 @@
+<div class="border-1 border-slate-800" *ngIf="hero">
+  <h2>{{ hero.name | textToUpperCaseTransform }} Details</h2>
+  <div>id: {{ hero.id }}</div>
+  <label for="name">Hero Name:</label>
+  <div>
+    <input
+      type="text"
+      class="border border-slate-800 rounded-md px-4 p-1"
+      id="name"
+      placeholder="name"
+      [(ngModel)]="hero.name"
+    />
+  </div>
+</div>
