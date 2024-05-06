@@ -5,6 +5,7 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { TextToUpperCaseTransformPipe } from '../../pipes/text-to-upper-case-transform.pipe';
 import { HeroDetailComponent } from '../hero-detail/hero-detail.component';
 import { HeroServiceService } from '../../services/hero-service.service';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   selector: 'app-heroes',
@@ -22,8 +23,12 @@ import { HeroServiceService } from '../../services/hero-service.service';
 })
 export class HeroesComponent {
   heroes: Hero[] = [];
+  selectHero?: Hero;
   header = 'My Heroes';
-  constructor(private heroSerive: HeroServiceService) {}
+  constructor(
+    private heroSerive: HeroServiceService,
+    private messageService: MessageService
+  ) {}
 
   //--- Method to receive hero from service ----
   // getHeros(): void {
@@ -40,8 +45,8 @@ export class HeroesComponent {
   }
 
   //--- Display a selected hero ---
-  selectedHero?: Hero;
-  onHeroSelect(hero: Hero): void {
-    this.selectedHero = hero;
+  onSelect(hero: Hero) {
+    this.selectHero = hero;
+    this.messageService.add(`Selected Hero: Hero Id = ${hero.id}`);
   }
 }

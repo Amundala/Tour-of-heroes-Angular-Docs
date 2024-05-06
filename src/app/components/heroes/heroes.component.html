@@ -4,7 +4,7 @@
     <button
       type="button"
       class="bg-slate-900 text-white rounded-md p-4"
-      (click)="onHeroSelect(hero)"
+      (click)="onSelect(hero)"
     >
       <span>{{ hero.id }}</span>
       <span>{{ hero.name | uppercase }}</span>
@@ -26,4 +26,4 @@
     />
   </div>
 </div> -->
-<app-hero-detail [hero]="selectedHero"></app-hero-detail>
+<app-hero-detail [hero]="selectHero"></app-hero-detail>
