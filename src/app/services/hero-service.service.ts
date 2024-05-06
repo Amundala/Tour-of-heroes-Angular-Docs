@@ -21,4 +21,11 @@ export class HeroServiceService {
     this.messageService.add("Holala! Your awaited hero's here");
     return heroes;
   }
+
+  //--- get a single hero fopr hero details component ----
+  getHero(id: number): Observable<Hero> {
+    const hero = HEROES.find((heroId) => heroId.id === id)!;
+    this.messageService.add(`Fetched Hero Id: ${id}`);
+    return of(hero);
+  }
 }

@@ -1,13 +1,10 @@
 <h2>{{ header | uppercase }}</h2>
 <ul>
   <li *ngFor="let hero of heroes">
-    <button
-      type="button"
-      class="bg-slate-900 text-white rounded-md p-4"
-      (click)="onSelect(hero)"
-    >
-      <span>{{ hero.id }}</span>
-      <span>{{ hero.name | uppercase }}</span>
+    <button type="button" class="bg-slate-900 text-white rounded-md p-4">
+      <a routerLink="/details/{{ hero.id }}">
+        <span>{{ hero.name | uppercase }}</span>
+      </a>
     </button>
   </li>
 </ul>
@@ -26,4 +23,3 @@
     />
   </div>
 </div> -->
-<app-hero-detail [hero]="selectHero"></app-hero-detail>

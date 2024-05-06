@@ -6,6 +6,8 @@ import { TextToUpperCaseTransformPipe } from '../../pipes/text-to-upper-case-tra
 import { HeroDetailComponent } from '../hero-detail/hero-detail.component';
 import { HeroServiceService } from '../../services/hero-service.service';
 import { MessageService } from '../../services/message.service';
+import { MessagesComponent } from '../messages/messages.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-heroes',
@@ -17,13 +19,15 @@ import { MessageService } from '../../services/message.service';
     NgFor,
     NgIf,
     HeroDetailComponent,
+    MessagesComponent,
+    RouterLink,
   ],
   templateUrl: './heroes.component.html',
   styleUrl: './heroes.component.css',
 })
 export class HeroesComponent {
   heroes: Hero[] = [];
-  selectHero?: Hero;
+  //selectHero?: Hero;
   header = 'My Heroes';
   constructor(
     private heroSerive: HeroServiceService,
@@ -45,8 +49,8 @@ export class HeroesComponent {
   }
 
   //--- Display a selected hero ---
-  onSelect(hero: Hero) {
-    this.selectHero = hero;
-    this.messageService.add(`Selected Hero: Hero Id = ${hero.id}`);
-  }
+  // onSelect(hero: Hero) {
+  //   this.selectHero = hero;
+  //   this.messageService.add(`Selected Hero: Hero Id = ${hero.id}`);
+  // }
 }
