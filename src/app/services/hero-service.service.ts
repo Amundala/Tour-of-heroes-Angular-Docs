@@ -34,18 +34,31 @@ export class HeroServiceService {
   //   return heroes;
   // }
 
-  //--- using http client & extend it with pipe to catch error---
+  //--- using http client & extend it with pipe to catch error & tap to ----
+  //---- add other effect wihout changing the emmited observable values---
+
   getHeroes(): Observable<Hero[]> {
-    return this.http
-      .get<Hero[]>(this.heroesUrl)
-      .pipe(catchError(this.handleError<Hero[]>('getHeroes', [])));
+    return this.http.get<Hero[]>(this.heroesUrl).pipe(
+      tap((_) => this.log('fetched Heroes')),
+      catchError(this.handleError<Hero[]>('getHeroes', []))
+    );
   }
 
   //--- get a single hero fopr hero details component ----
+  // getHero(id: number): Observable<Hero> {
+  //   const hero = HEROES.find((heroId) => heroId.id === id)!;
+  //   this.messageService.add(`Fetched Hero Id: ${id}`);
+  //   return of(hero);
+  // }
+
+  // get a single hero using http ---
   getHero(id: number): Observable<Hero> {
-    const hero = HEROES.find((heroId) => heroId.id === id)!;
-    this.messageService.add(`Fetched Hero Id: ${id}`);
-    return of(hero);
+    //--- end point ---
+    const url = `${this.heroesUrl}/${id}`;
+    return this.http.get<Hero>(url).pipe(
+      tap((_) => this.log(`Fetched hero Id: ${id}`)),
+      catchError(this.handleError<Hero>(`getHero with Id ${id}`))
+    );
   }
 
   //--- Handle error method ---
@@ -58,5 +71,18 @@ export class HeroServiceService {
       //--- let the app keep running by returning emplty result ---
       return of(result as T);
     };
+  }
+  // --- Defining the Headers ----
+  httoOptions = {
+    headers: new HttpHeaders({
+      Content_Types: 'application/json',
+    }),
+  };
+  //--- updating the hero ----
+  updateHero(hero: Hero): Observable<any> {
+    return this.http.put(this.heroesUrl, hero, this.httoOptions).pipe(
+      tap((_) => this.log(`Update hero Id: ${hero.id}`)),
+      catchError(this.handleError<any>('Updated'))
+    );
   }
 }
