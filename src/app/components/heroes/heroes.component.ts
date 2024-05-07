@@ -64,4 +64,10 @@ export class HeroesComponent {
       this.heroes.push(hero);
     });
   }
+
+  //--- Deleting a Hero ---
+  deteteHero(hero: Hero): void {
+    this.heroes = this.heroes.filter((h) => h !== hero);
+    this.heroSerive.deletehero(hero.id).subscribe();
+  }
 }
