@@ -53,4 +53,15 @@ export class HeroesComponent {
   //   this.selectHero = hero;
   //   this.messageService.add(`Selected Hero: Hero Id = ${hero.id}`);
   // }
+
+  //--- Adding A Hero ---
+  addHero(name: string): void {
+    name = name.trim();
+    if (!name) {
+      return;
+    }
+    this.heroSerive.addHero({ name } as Hero).subscribe((hero) => {
+      this.heroes.push(hero);
+    });
+  }
 }
