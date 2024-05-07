@@ -102,4 +102,19 @@ export class HeroServiceService {
       catchError(this.handleError<Hero>('Deelte hero'))
     );
   }
+
+  //--- searching functionality ---
+  searchHeroes(term: string): Observable<Hero[]> {
+    if (!term.trim()) {
+      return of([]);
+    }
+    return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
+      tap((x) =>
+        x.length
+          ? this.log(`Foudn Heroes Matching ${term}`)
+          : this.log(`No Heroes Matching ${term}`)
+      ),
+      catchError(this.handleError<Hero[]>(`search Heroes`, []))
+    );
+  }
 }
